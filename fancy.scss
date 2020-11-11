@@ -1,0 +1,267 @@
+$theme-color: #a862ea;
+$sub-color: #e7daff;
+$text-color: #303133;
+$bg-color: #ffffff;
+$font-size: 15px;
+$line-height: 1.8;
+$line-space: 15px;
+$monospace-font: Operator Mono, Consolas, Monaco, Menlo, monospace;
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+@mixin hoverUnderLine {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 98%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    background-color: $theme-color;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+.markdown-body {
+  // base
+  color: $text-color;
+  font-size: $font-size;
+  line-height: $line-height;
+  letter-spacing: 1.5px;
+  overflow-x: hidden;
+  word-break: break-word;
+  font-family: $font-family;
+  background-image: linear-gradient(
+      0deg,
+      transparent 24%,
+      rgba(201, 195, 195, 0.329) 25%,
+      rgba(209, 201, 201, 0.05) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(209, 204, 204, 0.185) 75%,
+      rgba(180, 176, 176, 0.05) 76%,
+      transparent 77%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      transparent 24%,
+      rgba(204, 196, 196, 0.226) 25%,
+      rgba(172, 165, 165, 0.05) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(209, 204, 204, 0.185) 75%,
+      rgba(180, 176, 176, 0.05) 76%,
+      transparent 77%,
+      transparent
+    );
+  background-size: 50px 50px;
+  padding-bottom: 100px;
+
+  ::selection {
+    color: #fff;
+    background-color: $theme-color;
+  }
+
+  // header
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding: 5px 0;
+    margin: 10px 0;
+    color: $theme-color;
+  }
+
+  h1 {
+    font-size: 1.4em;
+
+    & ~ p:first-of-type::first-letter {
+      color: $theme-color;
+      float: left;
+      font-size: 2em;
+      margin-right: 0.4em;
+      font-weight: bolder;
+    }
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  h3 {
+    font-size: 1.1em;
+  }
+
+  // ul, ol
+  ol,
+  ul {
+    padding-left: 2em;
+
+    li {
+      margin-bottom: 0;
+      list-style: inherit;
+      & .task-list-item {
+        list-style: none;
+        ul,
+        ol {
+          margin-top: 0;
+        }
+      }
+    }
+
+    ul,
+    ol {
+      margin-top: 3px;
+    }
+  }
+
+  ul {
+    list-style: disc outside none;
+  }
+
+  ol {
+    list-style: lower-roman outside none;
+  }
+
+  ol li {
+    padding-left: 0.5em;
+  }
+
+  li::marker {
+    color: $theme-color;
+  }
+
+  // p
+  p {
+    margin-top: $line-space;
+    margin-bottom: $line-space;
+    opacity: 0.8;
+    transition: all 0.1s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // link
+  a {
+    position: relative;
+    display: inline-block;
+    color: $theme-color;
+    cursor: pointer;
+    padding-bottom: 2px;
+    text-decoration: none;
+    @include hoverUnderLine();
+
+    &:active,
+    &:link {
+      color: $theme-color;
+    }
+  }
+
+  // img
+  img {
+    max-width: 100%;
+    user-select: none;
+    margin: 2em 0;
+    box-shadow: $sub-color 0 0 20px;
+  }
+
+  // quote
+  blockquote {
+    padding: 2px $line-space;
+    margin: $line-space 2px;
+    border-left: 4px solid $theme-color;
+    background-color: $sub-color;
+    border-radius: 2px;
+    & > p {
+      margin: 0.5em 0;
+    }
+  }
+
+  // code
+  code {
+    font-style: italic;
+    overflow-x: auto;
+    color: $theme-color;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 0 0.2em;
+    word-break: break-word;
+    font-family: $monospace-font;
+  }
+
+  pre {
+    position: relative;
+    overflow: auto;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: $line-height;
+    font-family: $monospace-font;
+    > code {
+      display: block;
+      font-style: normal;
+      padding: 2em;
+      word-break: normal;
+      color: $text-color;
+      border-radius: 10px;
+      background-color: $bg-color;
+      box-shadow: $sub-color 0 0 1em;
+    }
+  }
+
+  // table
+
+  // hr
+  hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid $sub-color;
+  }
+
+  table {
+    display: inline-block !important;
+    font-size: 12px;
+    width: auto;
+    max-width: 100%;
+    overflow: auto;
+    border: solid 1px #f6f6f6;
+  }
+
+  thead {
+    color: #000;
+    text-align: left;
+    background: #f6f6f6;
+  }
+
+  tr:nth-child(2n) {
+    background-color: #fcfcfc;
+  }
+
+  th,
+  td {
+    padding: 12px 7px;
+    line-height: 24px;
+  }
+
+  td {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 720px) {
+  .markdown-body {
+    font-size: 12px;
+  }
+}
