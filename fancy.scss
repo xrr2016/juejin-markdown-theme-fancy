@@ -1,18 +1,19 @@
 $theme-color: #a862ea;
 $sub-color: #e7daff;
-$text-color: #303133;
+$text-color: #383838;
 $bg-color: #ffffff;
+$light-color: #f8f5ff;
 $font-size: 15px;
-$line-height: 1.8;
 $line-space: 15px;
+$line-height: 2.5 * $line-space;
 $monospace-font: Operator Mono, Consolas, Monaco, Menlo, monospace;
-$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 @mixin hoverUnderLine {
   position: relative;
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 98%;
     height: 2px;
@@ -31,14 +32,13 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
 }
 
 .markdown-body {
-  // base
   color: $text-color;
   font-size: $font-size;
   line-height: $line-height;
-  letter-spacing: 1.5px;
-  overflow-x: hidden;
+  letter-spacing: 2px;
   word-break: break-word;
   font-family: $font-family;
+  scroll-behavior: smooth;
   background-image: linear-gradient(
       0deg,
       transparent 24%,
@@ -63,8 +63,9 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       transparent 77%,
       transparent
     );
+  background-color: $bg-color;
   background-size: 50px 50px;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
 
   ::selection {
     color: #fff;
@@ -78,12 +79,12 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
   h4,
   h5,
   h6 {
-    padding: 5px 0;
-    margin: 10px 0;
+    margin: $line-space * 2 0 $line-space 0;
     color: $theme-color;
   }
 
   h1 {
+    line-height: 2;
     font-size: 1.4em;
 
     & ~ p:first-of-type::first-letter {
@@ -110,7 +111,7 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
 
     li {
       margin-bottom: 0;
-      list-style: inherit;
+      padding-left: 0.2em;
       & .task-list-item {
         list-style: none;
         ul,
@@ -122,31 +123,17 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
 
     ul,
     ol {
-      margin-top: 3px;
+      margin-top: 10px;
     }
-  }
-
-  ul {
-    list-style: disc outside none;
-  }
-
-  ol {
-    list-style: lower-roman outside none;
-  }
-
-  ol li {
-    padding-left: 0.5em;
   }
 
   li::marker {
     color: $theme-color;
   }
 
-  // p
   p {
-    margin-top: $line-space;
-    margin-bottom: $line-space;
-    opacity: 0.8;
+    opacity: 0.9;
+    vertical-align: baseline;
     transition: all 0.1s ease;
 
     &:hover {
@@ -170,64 +157,72 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     }
   }
 
-  // img
   img {
     max-width: 100%;
     user-select: none;
-    margin: 2em 0;
-    box-shadow: $sub-color 0 0 20px;
-  }
+    margin: 1em 0;
+    box-shadow: 0 0 20px 0 $sub-color;
+    transition: transform 0.2s ease 0s;
+    background-color: $light-color;
 
-  // quote
-  blockquote {
-    padding: 2px $line-space;
-    margin: $line-space 2px;
-    border-left: 4px solid $theme-color;
-    background-color: $sub-color;
-    border-radius: 2px;
-    & > p {
-      margin: 0.5em 0;
+    &:hover {
+      opacity: 1;
+      transform: translateY(-5px);
     }
   }
 
-  // code
+  blockquote {
+    padding: 0.5em 1em;
+    margin: $line-space 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-left: 4px solid $theme-color;
+    background-color: $light-color;
+    & > p {
+      margin: 0;
+    }
+  }
+
   code {
-    font-style: italic;
+    padding: 2px 0.4em;
     overflow-x: auto;
     color: $theme-color;
-    font-size: 0.9em;
-    font-weight: 600;
-    padding: 0 0.2em;
+    font-weight: bold;
     word-break: break-word;
     font-family: $monospace-font;
+    background-color: $light-color;
   }
 
   pre {
-    position: relative;
-    overflow: auto;
-    padding: 10px;
-    border-radius: 10px;
-    line-height: $line-height;
-    font-family: $monospace-font;
+    margin: 2em 0;
+    box-shadow: 0 0 20px $sub-color;
     > code {
       display: block;
-      font-style: normal;
-      padding: 2em;
+      padding: 1.5em;
       word-break: normal;
+      font-style: normal;
+      font-weight: normal;
       color: $text-color;
-      border-radius: 10px;
-      background-color: $bg-color;
-      box-shadow: $sub-color 0 0 1em;
+      border-radius: 3px;
+      font-family: $monospace-font;
+      scroll-behavior: smooth;
+
+      &::-webkit-scrollbar {
+        height: 6px;
+        background-color: $sub-color;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $theme-color;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
     }
   }
 
-  // table
-
-  // hr
   hr {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    border-top: 1px solid $sub-color;
+    margin: 2em 0;
+    border-top: 1px solid $theme-color;
   }
 
   table {
@@ -236,13 +231,13 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     width: auto;
     max-width: 100%;
     overflow: auto;
-    border: solid 1px #f6f6f6;
+    border: solid 1px $sub-color;
   }
 
   thead {
-    color: #000;
     text-align: left;
-    background: #f6f6f6;
+    color: $theme-color;
+    background: $light-color;
   }
 
   tr:nth-child(2n) {
@@ -251,8 +246,8 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
 
   th,
   td {
-    padding: 12px 7px;
-    line-height: 24px;
+    padding: 1em 0.5em;
+    line-height: $line-height * 1.5;
   }
 
   td {
