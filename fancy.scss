@@ -131,7 +131,8 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     color: $theme-color;
   }
 
-  p {
+  p,
+  li {
     opacity: 0.9;
     vertical-align: baseline;
     transition: all 0.1s ease;
@@ -167,7 +168,7 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 
     &:hover {
       opacity: 1;
-      transform: translateY(-5px);
+      transform: translateY(-2px);
     }
   }
 
@@ -200,20 +201,22 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       display: block;
       padding: 1.5em;
       word-break: normal;
+      font-size: 0.9em;
       font-style: normal;
       font-weight: normal;
+      font-family: $monospace-font;
+      line-height: 1.5 * $line-space;
       color: $text-color;
       border-radius: 3px;
-      font-family: $monospace-font;
       scroll-behavior: smooth;
 
       &::-webkit-scrollbar {
         height: 6px;
-        background-color: $sub-color;
+        background-color: $light-color;
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: $theme-color;
+        background-color: $sub-color;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
       }
@@ -226,32 +229,25 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 
   table {
-    display: inline-block !important;
     font-size: 12px;
-    width: auto;
     max-width: 100%;
     overflow: auto;
+    border-collapse: collapse;
     border: solid 1px $sub-color;
   }
 
   thead {
-    text-align: left;
     color: $theme-color;
     background: $light-color;
   }
 
-  tr:nth-child(2n) {
-    background-color: #fcfcfc;
-  }
-
-  th,
-  td {
+  td,
+  th {
     padding: 1em 0.5em;
-    line-height: $line-height * 1.5;
   }
 
-  td {
-    min-width: 120px;
+  tr {
+    background-color: #fcfcfc;
   }
 }
 
