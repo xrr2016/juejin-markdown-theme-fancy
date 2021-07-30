@@ -4,7 +4,7 @@ $text-color: #383838;
 $bg-color: #ffffff;
 $light-color: #f8f5ff;
 $font-size: 15px;
-$line-space: 15px;
+$line-space: 12px;
 $line-height: 2.5 * $line-space;
 $monospace-font: Operator Mono, Consolas, Monaco, Menlo, monospace;
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -16,7 +16,7 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     content: '';
     position: absolute;
     width: 98%;
-    height: 2px;
+    height: 1px;
     bottom: 0;
     left: 0;
     transform: scaleX(0);
@@ -65,14 +65,13 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     );
   background-color: $bg-color;
   background-size: 50px 50px;
-  padding-bottom: 120px;
+  padding-bottom: 60px;
 
   ::selection {
     color: #fff;
     background-color: $theme-color;
   }
 
-  // header
   h1,
   h2,
   h3,
@@ -104,7 +103,6 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     font-size: 1.1em;
   }
 
-  // ul, ol
   ol,
   ul {
     padding-left: 2em;
@@ -112,8 +110,14 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     li {
       margin-bottom: 0;
       padding-left: 0.2em;
-      & .task-list-item {
+
+      &::marker {
+        color: $theme-color;
+      }
+
+      &.task-list-item {
         list-style: none;
+
         ul,
         ol {
           margin-top: 0;
@@ -127,13 +131,17 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     }
   }
 
-  li::marker {
-    color: $theme-color;
-  }
-
   p,
-  li {
-    opacity: 0.9;
+  li,
+  code,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a {
+    opacity: 0.85;
     vertical-align: baseline;
     transition: all 0.1s ease;
 
@@ -142,13 +150,11 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     }
   }
 
-  // link
   a {
     position: relative;
     display: inline-block;
     color: $theme-color;
     cursor: pointer;
-    padding-bottom: 2px;
     text-decoration: none;
     @include hoverUnderLine();
 
@@ -162,13 +168,14 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     max-width: 100%;
     user-select: none;
     margin: 1em 0;
-    box-shadow: 0 0 20px 0 $sub-color;
     transition: transform 0.2s ease 0s;
     background-color: $light-color;
+    box-shadow: 0 0 10px $sub-color;
 
     &:hover {
       opacity: 1;
-      transform: translateY(-2px);
+      box-shadow: 0 0 20px $sub-color;
+      transform: translateY(-1px);
     }
   }
 
@@ -177,7 +184,17 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     margin: $line-space 0;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
-    border-left: 4px solid $theme-color;
+    border-left: 3px solid $theme-color;
+    background-color: $light-color;
+    & > p {
+      margin: 0;
+    }
+  }
+
+  .math {
+    font-style: italic;
+    margin: $line-space 0;
+    padding: 0.5em 1em;
     background-color: $light-color;
     & > p {
       margin: 0;
@@ -196,7 +213,7 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 
   pre {
     margin: 2em 0;
-    box-shadow: 0 0 20px $sub-color;
+
     > code {
       display: block;
       padding: 1.5em;
@@ -207,8 +224,13 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       font-family: $monospace-font;
       line-height: 1.5 * $line-space;
       color: $text-color;
-      border-radius: 3px;
+      border-radius: 2px;
       scroll-behavior: smooth;
+      box-shadow: 0 0 10px $sub-color;
+
+      &:hover {
+        box-shadow: 0 0 20px $sub-color;
+      }
 
       &::-webkit-scrollbar {
         height: 6px;
@@ -229,11 +251,11 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 
   table {
+    width: 100%;
     font-size: 12px;
     max-width: 100%;
     overflow: auto;
     border-collapse: collapse;
-    border: solid 1px $sub-color;
   }
 
   thead {
@@ -243,11 +265,12 @@ $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 
   td,
   th {
-    padding: 1em 0.5em;
+    padding: 0.5em;
+    border: solid 1px $sub-color;
   }
 
   tr {
-    background-color: #fcfcfc;
+    background-color: $light-color;
   }
 }
 
